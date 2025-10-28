@@ -4,9 +4,11 @@ Sistema em Go que recebe um CEP, identifica a cidade e retorna o clima atual (te
 
 ## Endereço do projeto no Google Cloud Run
 
-```
-https://SERVICE_APP/api/weather?cep=01153000
-```
+https://goexpert-clima-cep-go-339989121667.us-central1.run.app
+
+Para testar, utilize o endpoint `/api/weather?cep=01153000`:
+
+https://goexpert-clima-cep-go-339989121667.us-central1.run.app/api/weather?cep=01153000
 
 ## Como rodar o projeto localmente
 

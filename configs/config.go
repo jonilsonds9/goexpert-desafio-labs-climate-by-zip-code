@@ -7,6 +7,7 @@ import (
 )
 
 type Config struct {
+	Port                 string
 	WeatherAPIKey        string
 	OpenWeatherMapAPIKey string
 }
@@ -20,6 +21,11 @@ func LoadConfig() *Config {
 
 	_ = viper.ReadInConfig()
 
+	port := viper.GetString("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
 	weatherAPIKey := viper.GetString("WEATHERAPI_KEY")
 	if weatherAPIKey == "" {
 		log.Fatal("WEATHERAPI_KEY is required. Please set it in .env file or environment variables")
@@ -31,6 +37,7 @@ func LoadConfig() *Config {
 	}
 
 	return &Config{
+		Port:                 port,
 		WeatherAPIKey:        weatherAPIKey,
 		OpenWeatherMapAPIKey: openWeatherMapAPIKey,
 	}

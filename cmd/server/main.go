@@ -24,8 +24,14 @@ func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/api/weather", handlers.NewWeatherHandler(viaCEPClient, geoClient, weatherClient))
 
-	addr := ":8080"
-	log.Printf("listening on %s", addr)
+	// Root endpoint
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte("Weather API is running"))
+	})
+
+	log.Printf("Server starting on port %s", cfg.Port)
+	addr := ":" + cfg.Port
 	if err := http.ListenAndServe(addr, logRequests(mux)); err != nil {
 		log.Fatalf("server error: %v", err)
 	}
